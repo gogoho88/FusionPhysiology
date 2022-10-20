@@ -1,0 +1,20 @@
+# Overall
+data_root: '/data/Target_Jaeho/st/Data_forpython_st_Fusion/'
+data_save_root: '/workspace/Res_VitalMonitoring_Fusion/dataset/'
+
+# Video Parameter
+FPS: 30
+img_resize: 36
+# Radar Parameter
+N_Rx: 4
+PRF: 1000
+Clut_mode: 1    # 0: Raw, 1: Clutter-removed
+STFT_W: 0.3     # STFT Window Size [s]
+STFT_Fcut: 0.9  # STFT Cutting Ratio in Freq domain (ex- 0.9 of whole data is removed)
+STFT_DB: True
+STFT_nfft: 1024 
+STFT_resize_T: 600    # Resize Dim in time domain
+STFT_resize_F: 128    # Resize Dim in freq domain
+# Fusion Parameter
+Frame_s: 10
+Frame_stride: 2.5
