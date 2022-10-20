@@ -10,7 +10,7 @@ from torch.utils.data import Dataset
 
 
 
-# 해야할 것
+# To do list
 # Spectrogram cut, Flip, Normalize, Resize, Dynamic range adjust
 
 class prepro_Normalize(object):

@@ -1,30 +1,5 @@
 """
-마지막 feature에서 Radar feature만 사용하여 성능 확인 중
--try 8: transformer dropout 0.1->0                                      -> 안나아져 다시 되돌림
-        transformer activation function ReLU -> Tanh
-        transformer pos embedding zeros로 init.에서 randn.으로 init.
-        이 상태로 다시 돌렸더니... 또 수렴은 하긴함.. 할때마다 달라지네
-        (근데 추정 그래프가 좀 이상.. 좀 스무딩 된 형태..?)
--try 9:  Fuse_transform + X_vidM -> F.tanh(Fuse_transform) + X_vidM으로 변경 (dynamic range 서로 안맞아서)      -> 이건 일단 적용 상태
-이게 지금 tanh쓴데 반해 layer가 너무 깊어 vanishing되어 그런가? ReLU 써보자 다시(transfoemer)만
--try 10: transformer activation function Tanh -> 다시 ReLU              -> 안나아져 다시 되돌림 
--try 11: transformer n_layer 4->1                                       -> epoch 늘수록 점점 test error 주는것 같긴 함, 많은 epoch로 test 필요, 이것 적용
--try 12: try 11 500 epoch로 성능 확인
--try 13: 전체 network activation Tanh->ReLU으로 변경하면서 fusion할때 dynamic range 맞춰주기 위해 X쪽에두 layernorm        -> 굉장히 잘됨!
--try 14: 13에서 n_layer 1->4로 수정하여 테스트                              -> 안나아져 다시 되돌림
--try 15: 13에서 layernorm은 유지하되 ReLU->Tanh                             -> 확실히 성능 낮아짐 -> ReLU가 효과적인듯
-### 여기서부터는 fusion으로 test (try 13 기준), 40 epoch만 돌리고 max 확인
--try 16: sum-based
--try 17: radar only로 한번 test (relu 기반)
--try 18: concat-based (여기서부터 Lrelu로 다 바꿈)
--try 19: 18에서 다시 한번 sum-based 확인 (Lrelu 성능 안나오는 것 같아 다시 relu로)
--try 20: 19에서 n_layer 1->3
-
-- 왜 layer 수 줄여야 잘되는거지..? 특히 2,3,4보다 1일시 확 잘되는 이유가 멀까
-- 이상하게 돌릴때마다 한번씩 뻑날때가 있음.. 이건 왜이런거지? (걍 이상한 신호 output)
-
-- 한번 30s로 test해보는것도 좋을 것 같음
-- 
+- Network model architecture
 """
 import torch
 import torch.nn as nn
